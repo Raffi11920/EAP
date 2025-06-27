@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C33E8B76-86F0-4462-A6EA-8CA5E1C87EB6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Qynix.EAP.Drivers.NATSCommunicationDriver</RootNamespace>
+    <AssemblyName>NATSCommunicationDriver</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Generic">
+      <HintPath>..\Libs\Generic.dll</HintPath>
+    </Reference>
+    <Reference Include="NATS.Client">
+      <HintPath>..\Libs\NATS.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="RMS.Common">
+      <HintPath>..\Libs\RMS.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ConstantBank.cs" />
+    <Compile Include="EAPMessages\Receive\InitializationMessage.cs" />
+    <Compile Include="EAPMessages\Send\EquipmentInitialization.cs" />
+    <Compile Include="EAPMessages\Send\UpdateControlState.cs" />
+    <Compile Include="EAPMessages\Send\UpdateProcessState.cs" />
+    <Compile Include="EventManager\EventArgument\NATSMessageEventArgs.cs" />
+    <Compile Include="Helper.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="MessageFactory.cs" />
+    <Compile Include="NATSCommunicator.cs" />
+    <Compile Include="NATSClientConfig.cs" />
+    <Compile Include="NATSEngine\NATSBase.cs" />
+    <Compile Include="NATSEngine\NATSController.cs" />
+    <Compile Include="NATSEngine\NATSPublisher.cs" />
+    <Compile Include="NATSEngine\NATSReplier.cs" />
+    <Compile Include="NATSEngine\NATSRequestor.cs" />
+    <Compile Include="NATSEngine\NATSSubsriber.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BridgeMessage\BridgeMessage.csproj">
+      <Project>{d65779f3-f101-4aa2-9340-912b544cd894}</Project>
+      <Name>BridgeMessage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EAPHelper\EAPHelper.csproj">
+      <Project>{441d5495-e6c7-4a4d-8c69-1c23af94815d}</Project>
+      <Name>EAPHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExtensionPlug\ExtensionPlug.csproj">
+      <Project>{2fe2dbf2-5c74-451c-b3c5-9ea492b90997}</Project>
+      <Name>ExtensionPlug</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\BaseInterfaces.csproj">
+      <Project>{f35136f1-b3e9-4471-82f3-e697de654388}</Project>
+      <Name>BaseInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QyLog\LogUtilities.csproj">
+      <Project>{efd51a95-9711-4041-b248-8a1edb447bd2}</Project>
+      <Name>LogUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XMLPlayer\XMLPlayer.csproj">
+      <Project>{878c1bda-5112-4cbc-9f43-f203b4b421b1}</Project>
+      <Name>XMLPlayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NATSMessages\Publish\" />
+    <Folder Include="NATSMessages\Reply\" />
+    <Folder Include="NATSMessages\Request\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y "$(TargetPath)" "$(SolutionDir)EAPController\bin\Debug\$(TargetFileName)"
+copy /Y "$(TargetPath)" "$(SolutionDir)EAPController\bin\Debug\$(TargetName).pdb"
+
+copy /Y "$(TargetPath)" "$(SolutionDir)EAPController\bin\Release\$(TargetFileName)"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
