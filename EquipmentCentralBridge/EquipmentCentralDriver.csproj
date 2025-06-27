@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{ADF93641-3460-407E-9B77-C49EDD8FD264}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Qynix.EAP.Drivers.EquipmentCentralDriver</RootNamespace>
+    <AssemblyName>EquipmentCentralDriver</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ConstantBank.cs" />
+    <Compile Include="EAPMessages\Receive\InitializationReceive.cs" />
+    <Compile Include="EAPMessages\Send\InitializationMessage.cs" />
+    <Compile Include="EquipmentCentral.cs" />
+    <Compile Include="EquipmentCentralConfig.cs" />
+    <Compile Include="Helper.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BridgeMessage\BridgeMessage.csproj">
+      <Project>{d65779f3-f101-4aa2-9340-912b544cd894}</Project>
+      <Name>BridgeMessage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EAPHelper\EAPHelper.csproj">
+      <Project>{441D5495-E6C7-4A4D-8C69-1C23AF94815D}</Project>
+      <Name>EAPHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExtensionPlug\ExtensionPlug.csproj">
+      <Project>{2fe2dbf2-5c74-451c-b3c5-9ea492b90997}</Project>
+      <Name>ExtensionPlug</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\BaseInterfaces.csproj">
+      <Project>{F35136F1-B3E9-4471-82F3-E697DE654388}</Project>
+      <Name>BaseInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QyLog\LogUtilities.csproj">
+      <Project>{efd51a95-9711-4041-b248-8a1edb447bd2}</Project>
+      <Name>LogUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XMLPlayer\XMLPlayer.csproj">
+      <Project>{878C1BDA-5112-4CBC-9F43-F203B4B421B1}</Project>
+      <Name>XMLPlayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="EAPMessages\Reply\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y "$(TargetPath)" "$(SolutionDir)EAPController\bin\Debug\$(TargetFileName)"
+
+copy /Y "$(TargetPath)" "$(SolutionDir)EAPController\bin\Release\$(TargetFileName)"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
