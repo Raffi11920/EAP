@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Qynix.EAP.Base.BaseInterfaces
+{
+    using BridgeMessage;
+
+    public interface IEAPMessaging
+    {
+        int ReceiveMessage(IBridgeMessage bridgeMessage);
+    }
+}
