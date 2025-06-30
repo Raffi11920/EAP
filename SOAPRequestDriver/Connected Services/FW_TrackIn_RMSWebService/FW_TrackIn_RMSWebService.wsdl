@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="RMSTrackIn">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FWLotID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FWMachID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RMSTrackInResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RMSTrackInResult" type="tns:TrackIn" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="TrackIn">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="RMSDeleteJob">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RMSJobID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RMSDeleteJobResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RMSDeleteJobResult" type="tns:DeleteJob" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="DeleteJob">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="TrackIn" nillable="true" type="tns:TrackIn" />
+      <s:element name="DeleteJob" nillable="true" type="tns:DeleteJob" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="RMSTrackInSoapIn">
+    <wsdl:part name="parameters" element="tns:RMSTrackIn" />
+  </wsdl:message>
+  <wsdl:message name="RMSTrackInSoapOut">
+    <wsdl:part name="parameters" element="tns:RMSTrackInResponse" />
+  </wsdl:message>
+  <wsdl:message name="RMSDeleteJobSoapIn">
+    <wsdl:part name="parameters" element="tns:RMSDeleteJob" />
+  </wsdl:message>
+  <wsdl:message name="RMSDeleteJobSoapOut">
+    <wsdl:part name="parameters" element="tns:RMSDeleteJobResponse" />
+  </wsdl:message>
+  <wsdl:message name="RMSTrackInHttpGetIn">
+    <wsdl:part name="FWLotID" type="s:string" />
+    <wsdl:part name="FWMachID" type="s:string" />
+    <wsdl:part name="UserID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RMSTrackInHttpGetOut">
+    <wsdl:part name="Body" element="tns:TrackIn" />
+  </wsdl:message>
+  <wsdl:message name="RMSDeleteJobHttpGetIn">
+    <wsdl:part name="RMSJobID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RMSDeleteJobHttpGetOut">
+    <wsdl:part name="Body" element="tns:DeleteJob" />
+  </wsdl:message>
+  <wsdl:message name="RMSTrackInHttpPostIn">
+    <wsdl:part name="FWLotID" type="s:string" />
+    <wsdl:part name="FWMachID" type="s:string" />
+    <wsdl:part name="UserID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RMSTrackInHttpPostOut">
+    <wsdl:part name="Body" element="tns:TrackIn" />
+  </wsdl:message>
+  <wsdl:message name="RMSDeleteJobHttpPostIn">
+    <wsdl:part name="RMSJobID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RMSDeleteJobHttpPostOut">
+    <wsdl:part name="Body" element="tns:DeleteJob" />
+  </wsdl:message>
+  <wsdl:portType name="FW_TrackIn_RMSWebServiceSoap">
+    <wsdl:operation name="RMSTrackIn">
+      <wsdl:input message="tns:RMSTrackInSoapIn" />
+      <wsdl:output message="tns:RMSTrackInSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RMSDeleteJob">
+      <wsdl:input message="tns:RMSDeleteJobSoapIn" />
+      <wsdl:output message="tns:RMSDeleteJobSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="FW_TrackIn_RMSWebServiceHttpGet">
+    <wsdl:operation name="RMSTrackIn">
+      <wsdl:input message="tns:RMSTrackInHttpGetIn" />
+      <wsdl:output message="tns:RMSTrackInHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RMSDeleteJob">
+      <wsdl:input message="tns:RMSDeleteJobHttpGetIn" />
+      <wsdl:output message="tns:RMSDeleteJobHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="FW_TrackIn_RMSWebServiceHttpPost">
+    <wsdl:operation name="RMSTrackIn">
+      <wsdl:input message="tns:RMSTrackInHttpPostIn" />
+      <wsdl:output message="tns:RMSTrackInHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RMSDeleteJob">
+      <wsdl:input message="tns:RMSDeleteJobHttpPostIn" />
+      <wsdl:output message="tns:RMSDeleteJobHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FW_TrackIn_RMSWebServiceSoap" type="tns:FW_TrackIn_RMSWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RMSTrackIn">
+      <soap:operation soapAction="http://tempuri.org/RMSTrackIn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RMSDeleteJob">
+      <soap:operation soapAction="http://tempuri.org/RMSDeleteJob" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FW_TrackIn_RMSWebServiceSoap12" type="tns:FW_TrackIn_RMSWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RMSTrackIn">
+      <soap12:operation soapAction="http://tempuri.org/RMSTrackIn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RMSDeleteJob">
+      <soap12:operation soapAction="http://tempuri.org/RMSDeleteJob" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FW_TrackIn_RMSWebServiceHttpGet" type="tns:FW_TrackIn_RMSWebServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="RMSTrackIn">
+      <http:operation location="/RMSTrackIn" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RMSDeleteJob">
+      <http:operation location="/RMSDeleteJob" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FW_TrackIn_RMSWebServiceHttpPost" type="tns:FW_TrackIn_RMSWebServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="RMSTrackIn">
+      <http:operation location="/RMSTrackIn" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RMSDeleteJob">
+      <http:operation location="/RMSDeleteJob" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FW_TrackIn_RMSWebService">
+    <wsdl:port name="FW_TrackIn_RMSWebServiceSoap" binding="tns:FW_TrackIn_RMSWebServiceSoap">
+      <soap:address location="http://10.54.11.55/FW_RMS/FW_TrackIn_RMSWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FW_TrackIn_RMSWebServiceSoap12" binding="tns:FW_TrackIn_RMSWebServiceSoap12">
+      <soap12:address location="http://10.54.11.55/FW_RMS/FW_TrackIn_RMSWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FW_TrackIn_RMSWebServiceHttpGet" binding="tns:FW_TrackIn_RMSWebServiceHttpGet">
+      <http:address location="http://10.54.11.55/FW_RMS/FW_TrackIn_RMSWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FW_TrackIn_RMSWebServiceHttpPost" binding="tns:FW_TrackIn_RMSWebServiceHttpPost">
+      <http:address location="http://10.54.11.55/FW_RMS/FW_TrackIn_RMSWebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
