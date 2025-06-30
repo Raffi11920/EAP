@@ -1,0 +1,21 @@
+<!ELEMENT Dictionary (Trans)*>
+	<!ELEMENT Trans (Primary, Secondary)>
+		<!ATTLIST Trans Name CDATA #REQUIRED>
+		<!ATTLIST Trans Desc CDATA #REQUIRED>
+		<!ELEMENT Primary (Root)>
+			<!ATTLIST Primary Stream CDATA #REQUIRED>
+			<!ATTLIST Primary Func CDATA #REQUIRED>
+			<!ATTLIST Primary Name CDATA #REQUIRED>
+			<!ATTLIST Primary Desc CDATA #REQUIRED>
+		<!ELEMENT Secondary (Root)>
+			<!ATTLIST Secondary Stream CDATA #REQUIRED>
+			<!ATTLIST Secondary Func CDATA #REQUIRED>
+			<!ATTLIST Secondary Name CDATA #REQUIRED>
+			<!ATTLIST Secondary Desc CDATA #REQUIRED>
+			<!ELEMENT Root (Item)*>
+				<!ELEMENT Item (Item)*>
+					<!ATTLIST Item Name CDATA #REQUIRED>
+					<!ATTLIST Item Desc CDATA #REQUIRED>
+					<!ATTLIST Item Format CDATA #REQUIRED>
+					<!ATTLIST Item IsArray CDATA #REQUIRED>
+					<!ATTLIST Item Value CDATA #REQUIRED>
